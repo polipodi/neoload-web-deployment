@@ -63,7 +63,7 @@ Hardware requirements depends of the deployment types you have chosen.
 - Minimum 8GB of physical memory, 16 GB recommended
 - HDD: SSD disk, especially for MongoDB data directory (disk speed has an huge impact on the database performance)  
 
-  Note: size of the disk depends on the quantity of **bench hours** you want to keen in NeoLoad Web.  
+  Note: size of the disk depends on the quantity of **bench hours** you want to keep in NeoLoad Web.  
   
   Data consumption is about 200MB per hour.
   
@@ -121,7 +121,7 @@ For global installation instructions please refer to the official websites:
     
       Change **PATH_TO_YOUR_MONGODB_DIRECTORY** to the path of your data directory. 
       
-      > This is a mapping allowing persistence of a volume when your docker containers are restarted. This way, the MongoDB data is not volatile anymore   
+      > This is a mapping allowing persistence of a volume when your docker containers are restarted. This way, the MongoDB data is not volatile anymore.   
     
         ```
         mongo:
@@ -136,7 +136,7 @@ For global installation instructions please refer to the official websites:
           
       - NeoLoad Controller REST port: ```8080```
       
-      This is the port which will be used for communication between NeoLoad Controller and NeoLoad Web.
+      This is the port used for communication between NeoLoad Controller and NeoLoad Web.
       
       ```
       nlweb-backend:
@@ -148,7 +148,7 @@ For global installation instructions please refer to the official websites:
        
       - Public REST API port: ```8081```
       
-      This is the [public REST API](https://www.neotys.com/documents/doc/nlweb/latest/en/html/#25050.htm) port which is exposed by default on the backend.
+      This is the [public REST API](https://www.neotys.com/documents/doc/nlweb/latest/en/html/#25050.htm) port.
       
       ```
         nlweb-backend:
@@ -271,7 +271,7 @@ For global installation instructions please refer to the official websites:
 
     - 2 ways to stop NeoLoad Web properly:
 
-        - On the terminal where you launch your NeoLoad Web, type CTRL C.
+        - On the terminal where you launch your NeoLoad Web, type *CTRL C*.
         
             **or**
         
@@ -301,7 +301,7 @@ For global installation instructions please refer to the official websites:
     
     1.2. edit the file according to your environment
 
-    - Setup access to your MongoDB
+    - Setup access to your MongoDB (**required**)
     
         Change ```environment``` section of ```nlweb-backend```.    
         **MONGO_HOST_VALUE** and **MONGO_PORT_VALUE** must be changed.
