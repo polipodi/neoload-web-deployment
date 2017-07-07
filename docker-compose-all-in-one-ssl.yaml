@@ -1,0 +1,63 @@
+mongo:
+  image: mongo:3.2.14
+  hostname: mongo
+  volumes:
+  - /path/to/mongodb/data/folder:/data/db
+  - /path/to/mongodb/backup/folder:/data/backup
+  tty: true
+  stdin_open: true
+  container_name: mongo
+nlweb-backend:
+  # NeoLoad Web Backend:
+  # - 8080: NeoLoad GUI REST Port
+  # - 8081: Public API Swagger Port
+  # - 9092: NeoLoad Web BackendEnd Monitoring
+  image: neotys/nlweb-backend-onpremise:latest
+  environment:
+    START_MODE: ON_PREMISE
+    MEMORY_MAX: 1300m
+    MONGODB_HOST: mongo
+    MONGODB_PORT: 27017
+    MONGODB_MAX_POOLSIZE: 50
+    JETTY_DYNAMIC_PORT: "false"
+    JETTY_PORT: 9092
+    SAAS: "false"
+    PRODUCT_NAME: NeoLoad
+  links:
+  - mongo
+  tty: true
+  stdin_open: true
+  container_name: nlweb-backend
+nlweb-frontend:
+  # NeoLoad Web Frontend:
+  # - 80: NeoLoad Web Interface
+  # - 81: NeoLoad Web FrontEnd Monitoring
+  image: neotys/nlweb-front-onpremise:latest
+  environment:
+    START_MODE: ON_PREMISE
+    MEMORY_MAX: 896m
+    JETTY_DYNAMIC_PORT: "false"
+    JETTY_PORT: 9090
+    ADMIN_PORT: 9091
+    SAAS: "false"
+    PRODUCT_NAME: NeoLoad
+  links:
+  - nlweb-backend
+  tty: true
+  stdin_open: true
+  container_name: nlweb-frontend
+nginx:
+  image: nginx:alpine
+  ports:
+  - 443:443 # 80
+  - 444:444 # 81
+  - 8080:8080 # 8080
+  - 8081:8081 # 8081
+  - 9092:9092 # 9092
+  volumes:
+  - /path/to/your/certs/folder:/cert
+  - ./:/etc/nginx/conf.d/
+  links:
+  - nlweb-frontend
+  - nlweb-backend
+  container_name: nginx
