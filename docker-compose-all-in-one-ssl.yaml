@@ -14,15 +14,10 @@ nlweb-backend:
   # - 9092: NeoLoad Web BackendEnd Monitoring
   image: neotys/nlweb-backend-onpremise:latest
   environment:
-    START_MODE: ON_PREMISE
     MEMORY_MAX: 1300m
     MONGODB_HOST: mongo
     MONGODB_PORT: 27017
     MONGODB_MAX_POOLSIZE: 50
-    JETTY_DYNAMIC_PORT: "false"
-    JETTY_PORT: 9092
-    SAAS: "false"
-    PRODUCT_NAME: NeoLoad
   links:
   - mongo
   tty: true
@@ -34,13 +29,7 @@ nlweb-frontend:
   # - 81: NeoLoad Web FrontEnd Monitoring
   image: neotys/nlweb-front-onpremise:latest
   environment:
-    START_MODE: ON_PREMISE
     MEMORY_MAX: 896m
-    JETTY_DYNAMIC_PORT: "false"
-    JETTY_PORT: 9090
-    ADMIN_PORT: 9091
-    SAAS: "false"
-    PRODUCT_NAME: NeoLoad
   links:
   - nlweb-backend
   tty: true
