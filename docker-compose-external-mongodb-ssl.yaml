@@ -43,6 +43,8 @@ nginx:
   - 8080:8080
   - 8081:8081
   - 9092:9092
+  environment:
+  - NGINX_HOST=foobar.com
   volumes:
   - /path/to/your/certs/folder:/cert
   - ./:/etc/nginx/conf.d/
